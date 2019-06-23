@@ -1,10 +1,10 @@
-const { findFocusedNode, sleep,  } = require('../utils')
+const { findFocusedNode, sleep } = require('../utils')
 
 module.exports = ({ assert }) => [
   [
     'Can close the modal with Escape and restores focus',
-    async function test({ page, controlSelector }) {
-      const control = await page.$(controlSelector)
+    async function test({ page, control }) {
+      control = typeof control === 'string' ? await page.$(control) : control
       assert.ok(control)
 
       control.focus()
@@ -15,7 +15,6 @@ module.exports = ({ assert }) => [
 
       const dialog = await page.$('[role="dialog"]')
       assert.ok(dialog)
-
       // TODO Should implement a wait until helper to retry selecting elements.
       await sleep(100)
 
@@ -25,9 +24,11 @@ module.exports = ({ assert }) => [
       assert.deepEqual(restoreFocusNode, findFocusedNode(snapshot))
 
       // Probably this is better than checking the accessibility tree.
-      assert.ok(await page.evaluate(control => {
-        return control.ownerDocument.activeElement === control
-      }, control))
+      assert.ok(
+        await page.evaluate(control => {
+          return control.ownerDocument.activeElement === control
+        }, control)
+      )
     },
   ],
 ]

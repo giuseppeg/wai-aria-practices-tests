@@ -16,7 +16,7 @@ async function run() {
 
       await test({
         page,
-        controlSelector: '#ex1 button',
+        control: '#ex1 button',
       })
     })
   )

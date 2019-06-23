@@ -6,7 +6,7 @@ const headless = process.env.HEADLESS !== 'false'
 // TODO these adapters should be exported.
 const assert = {
   ok: thing => expect(thing).toBeTruthy(),
-  deepEqual: (a, b) => expect(a).toEqual(b)
+  deepEqual: (a, b) => expect(a).toEqual(b),
 }
 
 describe('Suite', () => {
@@ -31,7 +31,7 @@ describe('Suite', () => {
 
         await test({
           page,
-          controlSelector: '#ex1 button',
+          control: '#ex1 button',
         })
       })
     })
