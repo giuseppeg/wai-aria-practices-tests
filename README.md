@@ -6,13 +6,14 @@ The tests are written to work with Puppeteer and aim to be plug-n-play, i.e. the
 
 This repo provides generic test suites that you can run against your applications of websites to test that behaviors of your widget adhere to the [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1).
 
+Many folks don't spend time on accessibility and I hope that such a tool could encourage them to fix issues in a "test driven development" manner.
+
 Note this is not a static analysis tool that checks for valid HTML [aria] attributes or semantic HTML.
 
 ## Proof of concept
 
 Note this is a proof of concept. Your help and validation is very important to move this project forward.
 
-The goal of this project is to provide a . Many don't even spend time on accessibility and such a tool could encourage folks to fix issues in a "test driven development" manner.
 
 To start off I am going to try to write tests for [modal dialogs](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal). You can find the code for it in `common/dialog/index.js`.
 
