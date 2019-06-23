@@ -1,6 +1,6 @@
 {
   "name": "wai-aria-practices-tests",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A suite of end-to-end tests to check if your application is compliant with the WAI-ARIA authoring practices.",
   "main": "index.js",
   "scripts": {
