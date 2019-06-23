@@ -23,15 +23,30 @@ describe('Suite', () => {
   })
 
   describe('Dialog', () => {
-    createDialogTests({ assert }).map(([title, test]) => {
-      it(title, async () => {
-        await page.goto(
-          'https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html'
-        )
+    const tests = createDialogTests({ assert })
+    const sites = [
+      {
+        url:
+          'https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html',
+        control: '#ex1 button',
+      },
+      {
+        url: 'https://ui.reach.tech/dialog/',
+        control: '#dialogcontent-initialfocus ~ .react-live button',
+      },
+    ]
 
-        await test({
-          page,
-          control: '#ex1 button',
+    sites.forEach(site => {
+      describe(site.url, () => {
+        tests.forEach(([title, test]) => {
+          it(title, async () => {
+            await page.goto(site.url)
+
+            await test({
+              page,
+              control: site.control,
+            })
+          })
         })
       })
     })
