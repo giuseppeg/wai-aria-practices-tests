@@ -1,5 +1,7 @@
 const { findFocusedNode, sleep } = require('../utils')
 
+const dialogSelector = '[role="dialog"], dialog, [aria-modal]'
+
 module.exports = ({ assert }) => [
   [
     'Moves focus inside of the dialog',
@@ -9,7 +11,7 @@ module.exports = ({ assert }) => [
 
       await control.click()
 
-      const dialog = await getDialog(page)
+      const dialog = await page.waitForSelector(dialogSelector)
       assert.ok(dialog)
 
       assert.ok(
@@ -32,7 +34,7 @@ module.exports = ({ assert }) => [
 
       await control.click()
 
-      const dialog = await getDialog(page)
+      const dialog = await page.waitForSelector(dialogSelector)
       assert.ok(dialog)
 
       await page.keyboard.down('Shift')
@@ -58,7 +60,7 @@ module.exports = ({ assert }) => [
 
       await control.click()
 
-      const dialog = await getDialog(page)
+      const dialog = await page.waitForSelector(dialogSelector)
       assert.ok(dialog)
 
       await page.keyboard.down('Shift')
@@ -90,10 +92,14 @@ module.exports = ({ assert }) => [
 
       await control.click()
 
-      const dialog = await getDialog(page)
+      const dialog = await page.waitForSelector(dialogSelector)
       assert.ok(dialog)
 
       await page.keyboard.press('Escape')
+
+      await page.waitForSelector(dialogSelector, {
+        hidden: true
+      })
 
       snapshot = await page.accessibility.snapshot()
 
@@ -108,7 +114,3 @@ module.exports = ({ assert }) => [
     },
   ],
 ]
-
-async function getDialog(page) {
-  return (await page.$$('[role="dialog"], dialog, [aria-modal]'))[0]
-}
