@@ -14,7 +14,7 @@ async function run() {
     },
     {
       url: 'https://ui.reach.tech/dialog/',
-      control: '#dialogcontent-initialfocus ~ .react-live button',
+      control: '#dialogcontent-initialfocusref ~ .jsx-demo button',
     },
   ]
 
